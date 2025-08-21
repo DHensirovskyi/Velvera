@@ -1,0 +1,11 @@
+.drawerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.burger {
+  @media (min-width: 640px) {
+    display: none;
+  }
+}
