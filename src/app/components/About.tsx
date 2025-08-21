@@ -9,31 +9,6 @@ import { Button } from "@mantine/core";
 import { FaCheck } from "react-icons/fa";
 import Link from "next/link";
 
-
-interface Items{
-    img:string,
-    name:string,
-    description:string,
-}
-
-const items:Items[] = [
-    {
-        img: '/icon1.svg',
-        name: 'Krauses Haar',
-        description: 'Haare, die ständig trocken, kraus und schwer zu stylen aussehen'
-    },
-    {
-        img: '/icon2.svg',
-        name: 'Beschädigt',
-        description: 'Haar, das sich schwach anfühlt, leicht bricht und leblos aussieht'
-    },
-    {
-        img: '/icon3.svg',
-        name: 'Ausdünnendes Haar',
-        description: 'Mangel an Volumen und Dichte, wodurch Ihr Haar schlaff aussieht'
-    },
-]
-
 export default function About(){
     const ref = useRef(null)
     const ref2 = useRef(null)
@@ -59,7 +34,7 @@ export default function About(){
     );
 
     gsap.fromTo(
-      ref.current,
+      ref2.current,
       { y: 40, opacity: 0 },
       {
         y: 0,
@@ -67,7 +42,7 @@ export default function About(){
         duration: 1.5,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: ref.current,
+          trigger: ref2.current,
           start: 'top 85%',
           toggleActions: 'play none none reverse',
           once: true,
@@ -78,7 +53,7 @@ export default function About(){
 
 
     return(
-        <section className="flex items-center justify-center flex-col gap-[68px] text-center mb-[90px] w-full">
+        <section className="flex items-center justify-center flex-col gap-[68px] text-center sm:mb-[90px] mb-[90px] w-full">
             <div className="flex flex-col justify-center items-center gap-[18px]">
                 <div className="flex gap-2.5 w-full items-center text-center justify-center">
                     <span className="border-[0.5] w-[20px] h-[0.5px] border-black"></span>
@@ -115,7 +90,7 @@ export default function About(){
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-[50px] gap-[0px] w-full" ref={ref}>
+            <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-[50px] gap-[0px] w-full" ref={ref2}>
                 <div className="flex flex-col gap-5 xl:my-[52px] my-[0px] xl:mb-0 mb-[52px] w-full">
                     <div className="flex gap-2.5 items-center text-left">
                         <span className="border-[0.5] w-[20px] h-[0.5px] border-black" />

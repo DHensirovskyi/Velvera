@@ -15,7 +15,7 @@ type Links = {
 const links: Links[] = [
   { path: '/#über_uns', name: 'Über uns' },
   { path: '/#leistungen', name: 'Leistungen' },
-  { path: '/#prozess', name: 'Prozess' },
+  { path: '/#ablauf', name: 'Ablauf' },
   { path: '/#bewertungen', name: 'Bewertungen' },
 ];
 

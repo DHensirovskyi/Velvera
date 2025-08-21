@@ -7,7 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 const links = [
   { path: '/#über_uns', title: 'Über uns' },
   { path: '/#leistungen', title: 'Leistungen' },
-  { path: '/#prozess', title: 'Prozess' },
+  { path: '/#ablauf', title: 'Ablauf' },
   { path: '/#bewertungen', title: 'Bewertungen' },
 ];
 
