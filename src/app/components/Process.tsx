@@ -33,7 +33,7 @@ export default function Process(){
   }, []);
 
     return(
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-[48px] text-left sm:mb-[90px] mb-[90px] w-full">
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-[48px] text-left sm:mb-[90px] mb-[90px] w-full" id="ablauf">
             <div className="flex flex-col gap-[18px]">
                 <div className="flex gap-2.5 w-full items-center text-left">
                     <span className="border-[0.5] w-[20px] h-[0.5px] border-black"></span>

@@ -20,34 +20,52 @@
 }
 
 @font-face {
-  font-family: "MyFont";
-  src:
-    url("/fonts/Erode-Variable.woff2") format("woff2-variations"),
-    url("/fonts/Erode-Variable.ttf") format("truetype-variations");
+  font-family: "Erode";
+  src: url("/fonts/Erode-Variable.woff2") format("woff2-variations"),
+       url("/fonts/Erode-Variable.ttf") format("truetype-variations");
   font-weight: 300 800;
   font-style: normal;
   font-display: swap;
 }
 
-html {
-  font-synthesis: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: "Erode-Medium";
+  src: url("/fonts/Erode-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+html, body {
+  font-family: "Erode", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  scroll-behavior: smooth;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "MyFont", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 600;
-  font-variation-settings: "wght" 600;
-  font-optical-sizing: auto;                    
+  font-family: "Erode-Medium", "Erode", sans-serif;
+  font-weight: 500;
 }
 
 body {
   background-color: #fff;
 }
 
-#button {
+
+#button,
+#button2 {
   background-color: #FF6A00;
   border-radius: 12px;
-  width: auto;
+  width: fit-content;
+  padding: 0.5rem 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+#button:hover,
+#button2:hover {
+  transform: scale(0.99);
+}
+
+#button2 {
+  background-color: #1F1F1F;
 }

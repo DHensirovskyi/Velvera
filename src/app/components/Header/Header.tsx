@@ -21,7 +21,7 @@ export default function Header() {
           <h1 className="text-[1.75rem] tracking-[-1.4px] font-[600]">Velvéra</h1>
         </Link>
 
-        <nav className="hidden sm:flex gap-6 font-medium text-[0.938rem] text-black/70">
+        <nav className="hidden sm:flex gap-6 font-medium text-[0.938rem] text-black/70 hover:text-black">
           {links.map(l => <Link key={l.title} href={l.path}>{l.title}</Link>)}
         </nav>
 

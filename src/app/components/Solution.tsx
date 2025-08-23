@@ -56,7 +56,7 @@ export default function Solution(){
   }, []);
 
     return(
-        <section className="flex items-center justify-center flex-col gap-[68px] text-center mb-[90px] px-[25px] py-15 bg-[#FFFCFA] rounded-[20px]">
+        <section className="flex items-center justify-center flex-col gap-[68px] text-center mb-[90px] px-[25px] py-15 bg-[#FFFCFA] rounded-[20px]" id="leistungen">
             <div className="flex flex-col justify-center items-center gap-[18px]">
                 <div className="flex gap-2.5 w-[87px] items-center">
                     <div className="border-[0.5] w-full h-[0.5px] border-black"></div>
