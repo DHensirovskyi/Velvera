@@ -74,7 +74,7 @@ export default function Footer(){
                         <p className="top mb-6 text-[1.25rem] font-[500]">Menü</p>
                         <div className="bottom flex flex-col gap-4 text-black text-[1rem] font-normal">
                         {links.map(item => (
-                            <p><Link href={item.path} key={item.name} className="">{item.name}</Link></p>
+                            <Link href={item.path} key={item.name} style={{fontFamily:'font-family: "Inter", sans-serif;'}}>{item.name}</Link>
                         ))}
                         </div>
                     </div>
