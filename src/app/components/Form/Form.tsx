@@ -176,7 +176,7 @@ export default function AppointmentForm() {
             },
           })}
         >
-          Formular abschicken
+          <p>Formular abschicken</p>
         </Button>
 
         {submissionStatus.error && (
