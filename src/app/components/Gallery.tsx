@@ -43,7 +43,7 @@ export default function Gallery() {
         <h1 className="max-w-[615px] sm:text-[3.125rem]/[130%] text-[2rem]/[118%] font-semibold">
           Entdecken Sie unsere Verwandlungen und Haar-Makeovers
         </h1>
-        <Link href={"https://www.instagram.com/"}><Button id="button2">Mehr auf Instagram</Button></Link>
+        <Link href={"https://www.instagram.com/"}><Button id="button2"><p>Mehr auf Instagram</p></Button></Link>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] sm:gap-[22px] max-w-[1150px] mx-auto" ref={ref}>
