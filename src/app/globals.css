@@ -51,6 +51,9 @@ body {
   background-color: #fff;
 }
 
+p{
+  font-weight: 500;
+}
 
 #button,
 #button2 {
