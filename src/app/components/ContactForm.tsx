@@ -41,7 +41,9 @@ export default function ContactForm() {
                     </h1>
                     <Link href={"/#ablauf"}>
                         <Button id="button" className="tracking-[0px] mb-8">
+                            <p>
                             Wie es funktioniert
+                            </p>
                         </Button>
                     </Link>
                 </div>
