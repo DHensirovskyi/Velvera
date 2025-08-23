@@ -22,7 +22,7 @@ export default function Header() {
         </Link>
 
         <nav className="hidden sm:flex gap-6 font-medium text-[0.938rem] text-black/70 hover:text-black">
-          {links.map(l => <p><Link key={l.title} href={l.path}>{l.title}</Link></p>)}
+          {links.map(l => <Link key={l.title} href={l.path} style={{fontFamily:'font-family: "Inter", sans-serif;'}}>{l.title}</Link>)}
         </nav>
 
         <Link
