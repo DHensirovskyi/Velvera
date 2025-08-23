@@ -25,11 +25,12 @@ export default function Header() {
           {links.map(l => <Link key={l.title} href={l.path} style={{fontFamily:'font-family: "Inter", sans-serif;'}}>{l.title}</Link>)}
         </nav>
 
-        <Link
+         <Link
           href="/#kontakt"
           className="hidden sm:inline-flex items-center justify-center px-[18px] py-2 bg-[#1F1F1F] text-white rounded-[12px] text-[0.938rem] font-medium"
-        >
+        ><p>
           Kontakt
+          </p>
         </Link>
 
         <div className="sm:hidden">
