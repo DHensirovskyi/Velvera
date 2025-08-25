@@ -37,7 +37,7 @@ export default function Process(){
             <div className="flex flex-col gap-[18px]">
                 <div className="flex gap-2.5 w-full items-center text-left">
                     <span className="border-[0.5] w-[20px] h-[0.5px] border-black"></span>
-                    <p className="text-[1rem] text-black font-[400]">Über Velvera</p>
+                    <p className="text-[1rem] text-black font-[400]">Ablauf</p>
                 </div>
                 <h1 className="max-w-[615px] sm:text-[3.5rem]/[90%] text-[2rem]/[118%] font-semibold mb-6 sm:mb-8">
                     Der Ablauf
