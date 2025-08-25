@@ -57,7 +57,7 @@ export default function ContactForm() {
                     </div>
                     <div className="flex gap-[13px]">
                         <Image 
-                            src={"/comm1.svg"} 
+                            src={"/comm10.png"} 
                             alt={"comm"} 
                             width={58} 
                             height={58} 
