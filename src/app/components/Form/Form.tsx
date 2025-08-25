@@ -69,10 +69,36 @@ export default function AppointmentForm() {
 
   if (submissionStatus.succeeded) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <p style={{ color: '#FF6A00', fontWeight: 'bold', textAlign: 'center', fontSize: '1.25rem' }}>
-          Vielen Dank! Ihr Terminwunsch wurde gesendet. Wir melden uns bald bei Ihnen.
+      <div className="flex flex-col gap-3 items-center justify-center min-h-[430px] max-w-[400px]">
+        <p style={{ color: '#00D55C', fontWeight: 'bold', textAlign: 'center', fontSize: '1.5rem' }}>
+          Vielen Dank! ✅
         </p>
+        <div className="flex flex-col gap-1 items-center justify-center">
+          <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#1F1F1F', fontWeight: '600', }}>
+          Wir haben den von Ihnen gewählten Termin für Sie reserviert.🙂
+          </p>
+          <p style={{ textAlign: 'center', fontSize: '0.7rem', color: '#757575', fontWeight: 'normal' }}>
+          Die Bestätigung und weitere Details wurden an Ihre E-Mail-Adresse gesendet.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (submissionStatus.error) {
+    return (
+      <div className="flex flex-col gap-3 items-center justify-center min-h-[430px] max-w-[400px]">
+        <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center', fontSize: '1.5rem' }}>
+          Leider ist dieser Termin bereits vergeben
+        </p>
+        <div className="flex flex-col gap-1 items-center justify-center">
+          <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#1F1F1F', fontWeight: '600', }}>
+            Wir haben Ihnen eine Liste der nächstmöglichen Termine per E-Mail geschickt.
+          </p>
+          <p style={{ textAlign: 'center', fontSize: '0.7rem', color: '#757575', fontWeight: 'normal'}}>
+          Überprüfen Sie bitte Ihren Spam-Ordner.
+          </p>
+        </div>
       </div>
     );
   }
@@ -92,7 +118,7 @@ export default function AppointmentForm() {
             }}
             label="Vollständiger Name"
             key={form.key('fullName')}
-            placeholder="Anna Müller"
+            placeholder="Muzamal Hussain"
             required
           />
 
@@ -178,12 +204,6 @@ export default function AppointmentForm() {
         >
           <p>Formular abschicken</p>
         </Button>
-
-        {submissionStatus.error && (
-          <p style={{ color: 'red', fontSize: '1rem', marginTop: '1rem', textAlign: 'center' }}>
-            Fehler beim Senden. Bitte versuchen Sie es später erneut.
-          </p>
-        )}
       </form>
     </div>
   );
