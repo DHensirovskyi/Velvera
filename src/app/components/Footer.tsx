@@ -17,7 +17,7 @@ const links: Links[] = [
   { path: '/#leistungen', name: 'Leistungen' },
   { path: '/#ablauf', name: 'Ablauf' },
   { path: '/#bewertungen', name: 'Bewertungen' },
-  { path: '/#kontakt', title: 'Kontakt' },
+  { path: '/#kontakt', name: 'Kontakt' },
 ];
 
 const socials = [
