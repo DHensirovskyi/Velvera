@@ -9,6 +9,7 @@ const links = [
   { path: '/#leistungen', title: 'Leistungen' },
   { path: '/#ablauf', title: 'Ablauf' },
   { path: '/#bewertungen', title: 'Bewertungen' },
+  { path: '/#kontakt', title: 'Kontakt' },
 ];
 
 export default function Header() {
