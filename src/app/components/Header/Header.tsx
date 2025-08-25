@@ -43,7 +43,7 @@ export default function Header() {
         opened={opened}
         onClose={close}
         position="top"
-        size="xs"
+        size="sm"
         offset={0}
         overlayProps={{ opacity: 0.01}}
         styles={{
@@ -51,7 +51,7 @@ export default function Header() {
           header: { backgroundColor: 'white'},
         }}
       >
-        <div className="flex flex-col gap-6 mt-10 items-center">
+        <div className="flex flex-col gap-6 mt-13 items-center">
           {links.map(l => (
             <Link key={l.title} href={l.path} onClick={close} className='text-[1rem] text-black/70'>{l.title}</Link>
           ))}
