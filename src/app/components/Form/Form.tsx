@@ -92,7 +92,7 @@ export default function AppointmentForm() {
             }}
             label="Vollständiger Name"
             key={form.key('fullName')}
-            placeholder="Muzamal Hussain"
+            placeholder="Anna Müller"
             required
           />
 
