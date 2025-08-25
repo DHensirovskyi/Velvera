@@ -37,7 +37,7 @@ export default function AfterHero(){
             <h1 className="max-w-[615px] sm:text-[2.063rem] text-[1.625rem] font-semibold text-center">Die Stylisten bei Velvera haben mich durch jeden Schritt meiner Haarveränderung begleitet mit hervorragender fachkundiger Betreuung</h1>
 
             <div className="flex gap-[15px]">
-                <Image src={'/comm1.svg'} alt="comm1" width={58} height={58}/>
+                <Image src={'/comm10.png'} alt="comm1" width={58} height={58}/>
                 <div className="flex flex-col">
                     <p className="text-black/90 font-[500] text-[1.25rem]">Sarah Johnson</p>
                     <p className="text-black/50 font-[500] text-[0.875rem]">Balayage & Styling</p>
