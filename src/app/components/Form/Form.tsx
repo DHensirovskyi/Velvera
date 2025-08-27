@@ -40,13 +40,20 @@ export default function AppointmentForm() {
       message: '',
     },
     validate: {
-      fullName: (v) => (v.trim().length < 2 ? 'The name is too short' : null),
-      email: (v) => (/^\S+@\S+$/.test(v) ? null : 'Incorrect email'),
-      preferredService: (v) => (!v ? 'Please select a service' : null),
-      appointmentDate: (v) => (!v ? 'Please select a date' : null),
-      appointmentTime: (v) => (!v ? 'Please select a time' : null),
-      message: (v) => (v.trim().length < 4 ? 'The message is too short' : null),
+      fullName: (v) =>
+        v.trim().length < 2 ? 'Der Name ist zu kurz (mind. 2 Zeichen).' : null,
+      email: (v) =>
+        /^\S+@\S+$/.test(v) ? null : 'Ungültige E-Mail-Adresse.',
+      preferredService: (v) =>
+        !v ? 'Bitte einen Service auswählen.' : null,
+      appointmentDate: (v) =>
+        !v ? 'Bitte ein Datum auswählen.' : null,
+      appointmentTime: (v) =>
+        !v ? 'Bitte eine Uhrzeit auswählen.' : null,
+      message: (v) =>
+        v.trim().length < 4 ? 'Die Nachricht ist zu kurz (mind. 4 Zeichen).' : null,
     },
+    
   });
 
   const serviceOptions = [
