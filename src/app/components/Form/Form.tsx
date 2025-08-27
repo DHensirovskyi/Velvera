@@ -55,7 +55,7 @@ export default function AppointmentForm() {
     { value: 'Haarbehandlung', label: 'Haarbehandlung' },
     { value: 'Strähnchen', label: 'Strähnchen' },
     { value: 'Dauerwelle', label: 'Dauerwelle & Locken' },
-    { value: 'Beratung', label: 'Beratung' },
+    { value: 'consultation', label: 'Beratung' },
   ];
 
   const timeOptions = [
