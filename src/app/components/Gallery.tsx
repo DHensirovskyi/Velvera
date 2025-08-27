@@ -38,7 +38,7 @@ export default function Gallery() {
       <div className="flex flex-col items-center gap-[24px] text-center mb-[68px]">
         <div className="flex gap-2.5 items-center">
           <span className="border-[0.5] w-[20px] h-[0.5px] border-black" />
-          <p className="text-[1rem] text-black font-[400]">Galerie</p>
+          <p className="text-[1rem] text-black font-[500]">Galerie</p>
         </div>
         <h1 className="max-w-[615px] sm:text-[3.125rem]/[130%] text-[2rem]/[118%] font-semibold">
           Entdecken Sie unsere Verwandlungen und Haar-Makeovers

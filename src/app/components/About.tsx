@@ -85,7 +85,7 @@ export default function About(){
                         selbstbewusst und gepflegt fühlen.
                     </p>
                     <div className="w-0">
-                        <Link href={'/#kontakt'}><Button id="button">Professionelle Betreuung</Button></Link>
+                        <Link href={'/#kontakt'}><Button id="button"><p>Professionelle Betreuung</p></Button></Link>
                     </div>
                 </div>
             </div>

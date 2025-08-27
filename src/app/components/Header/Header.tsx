@@ -9,6 +9,7 @@ const links = [
   { path: '/#leistungen', title: 'Leistungen' },
   { path: '/#ablauf', title: 'Ablauf' },
   { path: '/#bewertungen', title: 'Bewertungen' },
+  { path: '/#kontakt', title: 'Kontakt' },
 ];
 
 export default function Header() {
@@ -21,8 +22,8 @@ export default function Header() {
           <h1 className="text-[1.75rem] tracking-[-1.4px] font-[600]">Velvéra</h1>
         </Link>
 
-        <nav className="hidden sm:flex gap-6 font-medium text-[0.938rem] text-black/70 hover:text-black">
-          {links.map(l => <Link key={l.title} href={l.path}>{l.title}</Link>)}
+        <nav className="hidden sm:flex gap-6 font-medium text-[0.938rem] text-black/70">
+          {links.map(l => <Link key={l.title} className='hover:text-black' href={l.path} style={{fontFamily:'font-family: "Inter", sans-serif;'}}>{l.title}</Link>)}
         </nav>
 
         <Link
@@ -41,7 +42,7 @@ export default function Header() {
         opened={opened}
         onClose={close}
         position="top"
-        size="xs"
+        size="sm"
         offset={0}
         overlayProps={{ opacity: 0.01}}
         styles={{
@@ -49,7 +50,7 @@ export default function Header() {
           header: { backgroundColor: 'white'},
         }}
       >
-        <div className="flex flex-col gap-6 mt-10 items-center">
+        <div className="flex flex-col gap-6 mt-13 items-center">
           {links.map(l => (
             <Link key={l.title} href={l.path} onClick={close} className='text-[1rem] text-black/70'>{l.title}</Link>
           ))}

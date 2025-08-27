@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tagesbericht — Velvera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  @media print { .no-print{display:none} body{background:#fff} .card{box-shadow:none} }
+  body{margin:0;background:#f6f7fb;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+  .card{max-width:820px;margin:40px auto;background:#fff;border-radius:16px;box-shadow:0 6px 24px rgba(18,18,23,.06);padding:24px}
+  .kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 16px}
+  .box{background:#f9fafb;border-radius:12px;padding:12px}
+  .muted{color:#6b7280;font-size:12px}
+  .btn{background:#FF6A00;color:#fff;border:none;border-radius:12px;padding:10px 14px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1 style="margin:0 0 8px">Tagesbericht — <span id="d"></span></h1>
+  <p class="muted" style="margin:0 0 16px">Velvera, Augsburg</p>
+
+  <div class="kpi">
+    <div class="box"><div class="muted">Bestätigt</div><div id="k1" style="font-size:24px;font-weight:700">12</div></div>
+    <div class="box"><div class="muted">Storniert</div><div id="k2" style="font-size:24px;font-weight:700">2</div></div>
+    <div class="box"><div class="muted">Neue Leads</div><div id="k3" style="font-size:24px;font-weight:700">7</div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px">Kommentar</h3>
+  <p style="color:#374151;margin:0 0 16px">Gute Auslastung, Peak 14:00–16:00. Empfehlung: morgen 15:00 und 16:30 öffnen.</p>
+
+  <h3 style="margin:16px 0 8px">Morgen noch frei</h3>
+  <ul style="margin:0 0 16px;color:#374151">
+    <li>10:00 — 11:00</li><li>14:00 — 15:00</li><li>16:30 — 17:30</li>
+  </ul>
+
+  <button class="no-print btn" onclick="window.print()">Als PDF speichern</button>
+</div>
+
+<script>
+  // сегодняшняя дата
+  const d = new Date(); document.getElementById('d').textContent = d.toLocaleDateString('de-DE');
+</script>
+</body>
+</html>

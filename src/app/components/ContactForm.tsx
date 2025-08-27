@@ -41,7 +41,9 @@ export default function ContactForm() {
                     </h1>
                     <Link href={"/#ablauf"}>
                         <Button id="button" className="tracking-[0px] mb-8">
+                            <p>
                             Wie es funktioniert
+                            </p>
                         </Button>
                     </Link>
                 </div>
@@ -55,7 +57,7 @@ export default function ContactForm() {
                     </div>
                     <div className="flex gap-[13px]">
                         <Image 
-                            src={"/comm1.svg"} 
+                            src={"/comm10.png"} 
                             alt={"comm"} 
                             width={58} 
                             height={58} 

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light">
+  <title>Erinnerung: in 2 Stunden</title>
+  <style>
+    body{margin:0;background:#f6f7fb}
+    .wrap{max-width:600px;margin:24px auto;background:#fff;border-radius:16px;box-shadow:0 6px 24px rgba(18,18,23,.06);overflow:hidden;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;color:#111827}
+    .inner{padding:24px}
+    .muted{color:#6b7280;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="inner">
+      <h2 style="margin:0 0 12px">Erinnerung: in 2 Stunden ⏰</h2>
+      <p id="intro" style="margin:0 0 12px">Hallo!</p>
+      <p id="details" style="margin:0 0 18px"></p>
+
+      <!-- Bulletproof button FF6A00 / white text -->
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 20px">
+        <tr>
+          <td bgcolor="#FF6A00" align="center" style="border-radius:12px;text-align:center;">
+            <!--[if mso]>
+              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="#" style="height:40px;v-text-anchor:middle;width:260px;" arcsize="24%" stroke="f" fillcolor="#FF6A00">
+                <w:anchorlock/>
+                <center style="color:#FFFFFF;font-family:Arial,sans-serif;font-size:16px;font-weight:700;">Termin stornieren</center>
+              </v:roundrect>
+            <![endif]-->
+            <!--[if !mso]><!-- -->
+            <a id="cancelLink" href="/cancelled.html" target="_blank"
+               style="background-color:#FF6A00;color:#FFFFFF !important;-webkit-text-fill-color:#FFFFFF;display:inline-block;padding:12px 18px;text-decoration:none;border-radius:12px;font-weight:700;font-size:16px;line-height:16px;mso-padding-alt:0;">
+              <span style="color:#FFFFFF !important;-webkit-text-fill-color:#FFFFFF;"><font color="#FFFFFF">Termin stornieren</font></span>
+            </a>
+            <!--<![endif]-->
+          </td>
+        </tr>
+      </table>
+
+      <p class="muted">Adresse: Augsburger Str. 1 · Tel.: +49 176 000000</p>
+      <p class="muted" style="margin-top:12px;word-break:break-all">
+        Falls die Schaltfläche nicht sichtbar ist: <a id="fallback" href="#" style="color:#FF6A00;text-decoration:underline">Link öffnen</a>
+      </p>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const qs = new URLSearchParams(location.search);
+  const name = qs.get('name') || 'Kunde';
+  const service = qs.get('service') || 'Service';
+  const date = qs.get('date') || '';  // YYYY-MM-DD
+  const time = qs.get('time') || '';
+  const slot = qs.get('slot') || '';
+
+  const dateHuman = date ? new Date(date+'T00:00:00').toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'}) : '';
+
+  document.getElementById('intro').textContent = `Hallo, ${name}!`;
+  document.getElementById('details').innerHTML = `Ihr Termin <b>${service}</b> beginnt in <b>ca. 2 Stunden</b>: <b>${dateHuman} ${time}</b>.`;
+
+  const cancelUrl = `/cancelled.html${slot ? ('?slot='+encodeURIComponent(slot)) : ''}`;
+  document.getElementById('cancelLink').href = cancelUrl;
+  document.getElementById('fallback').href = cancelUrl;
+})();
+</script>
+</body>
+</html>

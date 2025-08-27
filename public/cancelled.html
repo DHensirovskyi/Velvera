@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Termin storniert ❌</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:#f6f7fb;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    .card{max-width:560px;margin:40px auto;background:#fff;border-radius:16px;box-shadow:0 6px 24px rgba(18,18,23,.06);padding:24px;text-align:center}
+    .btn{display:inline-block;margin-top:16px;background:#FF6A00;color:#fff;padding:10px 14px;border-radius:12px;text-decoration:none}
+    .muted{color:#6b7280}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div style="font-size:48px;margin-bottom:8px">❌</div>
+    <h1 style="margin:0 0 8px">Termin storniert</h1>
+    <p id="msg" class="muted">Ihr Termin wurde storniert.</p>
+    <a href="/" class="btn">Zurück zur Website</a>
+  </div>
+
+  <script>
+    (function(){
+      const LS_KEY = 'bookedDatesDemo_v1';
+      const qs = new URLSearchParams(location.search);
+      const slot = qs.get('slot'); // "YYYY-MM-DD HH:MM"
+      const msg = document.getElementById('msg');
+
+      try {
+        if (slot) {
+          const raw = localStorage.getItem(LS_KEY);
+          const arr = raw ? JSON.parse(raw) : [];
+          const next = arr.filter(s => s !== slot);
+          localStorage.setItem(LS_KEY, JSON.stringify(next));
+          const [date, time] = slot.split(' ');
+          const dateHuman = new Date(date + 'T00:00:00').toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+          msg.textContent = `Termin ${dateHuman} ${time} wurde storniert.`;
+        } else {
+          msg.textContent = 'Termin wurde storniert.';
+        }
+      } catch (e) {
+      }
+    })();
+  </script>
+</body>
+</html>

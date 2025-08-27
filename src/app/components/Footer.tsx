@@ -17,6 +17,7 @@ const links: Links[] = [
   { path: '/#leistungen', name: 'Leistungen' },
   { path: '/#ablauf', name: 'Ablauf' },
   { path: '/#bewertungen', name: 'Bewertungen' },
+  { path: '/#kontakt', name: 'Kontakt' },
 ];
 
 const socials = [
@@ -74,7 +75,7 @@ export default function Footer(){
                         <p className="top mb-6 text-[1.25rem] font-[500]">Menü</p>
                         <div className="bottom flex flex-col gap-4 text-black text-[1rem] font-normal">
                         {links.map(item => (
-                            <Link href={item.path} key={item.name} className="">{item.name}</Link>
+                            <Link href={item.path} key={item.name} className="hover:text-black/70" style={{fontFamily:'font-family: "Inter", sans-serif;'}}>{item.name}</Link>
                         ))}
                         </div>
                     </div>
@@ -82,7 +83,7 @@ export default function Footer(){
                         <p className="top mb-6 text-[1.25rem] font-[500]">Socials</p>
                         <div className="bottom flex flex-col gap-4 text-black text-[1rem] font-normal">
                         {socials.map(item => (
-                            <Link href={item.path} key={item.id} className="">{item.name}</Link>
+                            <Link href={item.path} key={item.id} className="hover:text-black/70">{item.name}</Link>
                         ))}
                         </div>
                     </div>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Terminbestätigung</title>
+  <style>
+    body{margin:0;background:#f6f7fb}
+    .wrap{max-width:600px;margin:24px auto;background:#fff;border-radius:16px;box-shadow:0 6px 24px rgba(18,18,23,.06);overflow:hidden;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    .inner{padding:24px;color:#111827}
+    .btn{display:inline-block;background:#FF6A00;color:#fff;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:600}
+    .muted{color:#6b7280;font-size:12px}
+    .chip{display:inline-block;border:1px solid #e5e7eb;padding:6px 10px;border-radius:999px;font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="inner">
+      <h2 style="margin:0 0 12px">Terminbestätigung</h2>
+      <p id="intro" style="margin:0 0 14px">Hallo!</p>
+      <p id="details" style="margin:0 0 18px"></p>
+
+      <p style="margin:0 0 18px">
+        <a id="cancelLink" class="btn" href="/cancelled.html">Termin stornieren</a>
+      </p>
+
+      <hr style="border:none;border-top:1px solid #e5e7eb;margin:18px 0" />
+
+      <p class="muted">Wenn Sie doch kommen können — alles gut, der Termin bleibt für Sie reserviert.</p>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const qs = new URLSearchParams(location.search);
+      const name = qs.get('name') || 'Kunde';
+      const email = qs.get('email') || '';
+      const service = qs.get('service') || 'Service';
+      const date = qs.get('date'); // YYYY-MM-DD
+      const time = qs.get('time'); // HH:MM
+      const slot = qs.get('slot') || '';
+
+      const dateHuman = date ? new Date(date + 'T00:00:00').toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' }) : '';
+      document.getElementById('intro').textContent = `Hallo ${name},`;
+      document.getElementById('details').innerHTML =
+        `Ihr Termin ist reserviert am <span class="chip">${dateHuman} ${time || ''}</span>. ` +
+        (email ? `Eine Bestätigung wurde an <b>${email}</b> gesendet.` : '');
+
+      const cancel = document.getElementById('cancelLink');
+      cancel.href = `/cancelled.html?slot=${encodeURIComponent(slot)}`;
+    })();
+  </script>
+</body>
+</html>

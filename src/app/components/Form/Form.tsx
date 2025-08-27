@@ -1,12 +1,27 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Textarea, TextInput, Select } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import classes from './Form.module.css';
 
+const LS_KEY = 'bookedDatesDemo_v1';
+
 export default function AppointmentForm() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLFormElement | null>(null);
+
+  const [bookedSlots, setBookedSlots] = useState<string[]>([]);
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      if (raw) setBookedSlots(JSON.parse(raw));
+    } catch {}
+  }, []);
+  useEffect(() => {
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(bookedSlots));
+    } catch {}
+  }, [bookedSlots]);
 
   const [submissionStatus, setSubmissionStatus] = useState({
     submitting: false,
@@ -16,95 +31,128 @@ export default function AppointmentForm() {
 
   const form = useForm({
     mode: 'uncontrolled',
-    initialValues: { 
-      fullName: '', 
-      email: '', 
-      preferredService: '', 
+    initialValues: {
+      fullName: '',
+      email: '',
+      preferredService: '',
       appointmentDate: '',
-      message: '' 
+      appointmentTime: '',
+      message: '',
     },
     validate: {
       fullName: (v) => (v.trim().length < 2 ? 'The name is too short' : null),
       email: (v) => (/^\S+@\S+$/.test(v) ? null : 'Incorrect email'),
       preferredService: (v) => (!v ? 'Please select a service' : null),
       appointmentDate: (v) => (!v ? 'Please select a date' : null),
+      appointmentTime: (v) => (!v ? 'Please select a time' : null),
       message: (v) => (v.trim().length < 4 ? 'The message is too short' : null),
     },
   });
 
   const serviceOptions = [
-  { value: 'haircut', label: 'Haarschnitt & Styling' },
-  { value: 'coloring', label: 'Haarfärbung' },
-  { value: 'treatment', label: 'Haarbehandlung' },
-  { value: 'highlights', label: 'Strähnchen' },
-  { value: 'perm', label: 'Dauerwelle & Locken' },
-  { value: 'consultation', label: 'Beratung' },
+    { value: 'Haarschnitt', label: 'Haarschnitt & Styling' },
+    { value: 'Haarfärbung', label: 'Haarfärbung' },
+    { value: 'Haarbehandlung', label: 'Haarbehandlung' },
+    { value: 'Strähnchen', label: 'Strähnchen' },
+    { value: 'Dauerwelle', label: 'Dauerwelle & Locken' },
+    { value: 'Beratung', label: 'Beratung' },
+  ];
+
+  const timeOptions = [
+    { value: '09:00', label: '09:00' },
+    { value: '09:30', label: '09:30' },
+    { value: '10:00', label: '10:00' },
+    { value: '10:30', label: '10:30' },
+    { value: '11:00', label: '11:00' },
+    { value: '11:30', label: '11:30' },
+    { value: '12:00', label: '12:00' },
+    { value: '12:30', label: '12:30' },
+    { value: '13:00', label: '13:00' },
+    { value: '13:30', label: '13:30' },
+    { value: '14:00', label: '14:00' },
+    { value: '14:30', label: '14:30' },
+    { value: '15:00', label: '15:00' },
+    { value: '15:30', label: '15:30' },
+    { value: '16:00', label: '16:00' },
+    { value: '16:30', label: '16:30' },
+    { value: '17:00', label: '17:00' },
+    { value: '17:30', label: '17:30' },
+    { value: '18:00', label: '18:00' },
   ];
 
   const handleSubmit = async (values: typeof form.values) => {
     setSubmissionStatus({ submitting: true, succeeded: false, error: false });
+  
+    const { appointmentDate: dateKey, appointmentTime: timeKey } = values;
+    if (!dateKey || !timeKey) {
+      setSubmissionStatus({ submitting: false, succeeded: false, error: true });
+      return;
+    }
+    const slotKey = `${dateKey} ${timeKey}`;
+  
+    if (bookedSlots.includes(slotKey)) {
+      setSubmissionStatus({ submitting: false, succeeded: false, error: true });
+      return;
+    }
+  
     try {
-      const formattedValues = {
-        ...values,
-        appointmentDate: values.appointmentDate,
-      };
-
-      const response = await fetch('https://formspree.io/f/xqalrokg', {
+      await new Promise((r) => setTimeout(r, 300));
+  
+      setBookedSlots((prev) => Array.from(new Set([...prev, slotKey])));
+  
+      const res = await fetch('/api/send-confirmation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formattedValues),
+        body: JSON.stringify({
+          name: values.fullName,
+          email: values.email,
+          service: values.preferredService,
+          date: dateKey,
+          time: timeKey,
+          slot: slotKey,
+        }),
       });
-
-      if (response.ok) {
-        setSubmissionStatus({ submitting: false, succeeded: true, error: false });
-        form.reset();
-      } else {
-        throw new Error('Network response was not ok.');
+  
+      if (!res.ok) {
+        console.error('Email send failed', await res.json().catch(() => ({})));
       }
+  
+      setSubmissionStatus({ submitting: false, succeeded: true, error: false });
+      form.reset();
     } catch (e) {
-      console.error('Failed to submit the form:', e);
+      console.error(e);
       setSubmissionStatus({ submitting: false, succeeded: false, error: true });
     }
   };
+  
 
-  if (submissionStatus.succeeded) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <p style={{ color: '#FF6A00', fontWeight: 'bold', textAlign: 'center', fontSize: '1.25rem' }}>
-          Vielen Dank! Ihr Terminwunsch wurde gesendet. Wir melden uns bald bei Ihnen.
-        </p>
-      </div>
-    );
-  }
+
+  const formatBookedSlots = () => {
+    return bookedSlots.map(slot => {
+      const [date, time] = slot.split(' ');
+      const formattedDate = new Date(date).toLocaleDateString('de-DE');
+      return `${formattedDate} ${time}`;
+    });
+  };
 
   return (
     <div className="w-full max-w-[500px] mx-auto sm:p-6 p-0">
+
       <form className={classes.form} onSubmit={form.onSubmit(handleSubmit)} ref={ref}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <TextInput
             {...form.getInputProps('fullName')}
             error={form.errors.fullName}
-            classNames={{ 
-              root: classes.root, 
-              label: classes.label, 
-              input: classes.input, 
-              error: classes.error 
-            }}
+            classNames={{ root: classes.root, label: classes.label, input: classes.input, error: classes.error }}
             label="Vollständiger Name"
             key={form.key('fullName')}
             placeholder="Muzamal Hussain"
             required
           />
-
           <TextInput
             {...form.getInputProps('email')}
             error={form.errors.email}
-            classNames={{ 
-              root: classes.root, 
-              label: classes.label, 
-              input: classes.input, 
-              error: classes.error 
-            }}
+            classNames={{ root: classes.root, label: classes.label, input: classes.input, error: classes.error }}
             label="E-Mail-Adresse"
             key={form.key('email')}
             placeholder="info@gmail.com"
@@ -115,12 +163,7 @@ export default function AppointmentForm() {
         <Select
           {...form.getInputProps('preferredService')}
           error={form.errors.preferredService}
-          classNames={{ 
-            root: classes.root, 
-            label: classes.label, 
-            input: classes.input, 
-            error: classes.error 
-          }}
+          classNames={{ root: classes.root, label: classes.label, input: classes.input, error: classes.error }}
           label="Bevorzugter Service"
           placeholder="Auswählen..."
           data={serviceOptions}
@@ -130,29 +173,37 @@ export default function AppointmentForm() {
           mb="md"
         />
 
-        <div className="mb-4">
-          <label className={classes.label}>Termin</label>
-          <input
-            {...form.getInputProps('appointmentDate')}
-            type="date"
-            className={`${classes.input} w-full`}
-            min={new Date().toISOString().split('T')[0]}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div className={classes.root}>
+            <label className={classes.label}>Termin</label>
+            <input
+              {...form.getInputProps('appointmentDate')}
+              type="date"
+              className={`${classes.input} w-full`}
+              min={new Date().toISOString().split('T')[0]}
+              required
+            />
+            {form.errors.appointmentDate && <div className={classes.error}>{form.errors.appointmentDate}</div>}
+          </div>
+          
+          <Select
+            {...form.getInputProps('appointmentTime')}
+            error={form.errors.appointmentTime}
+            classNames={{ root: classes.root, label: classes.label, input: classes.input, error: classes.error }}
+            label="Uhrzeit"
+            placeholder="Auswählen..."
+            data={timeOptions}
+            searchable
+            clearable
             required
+            disabled={!form.values.appointmentDate}
           />
-          {form.errors.appointmentDate && (
-            <div className={classes.error}>{form.errors.appointmentDate}</div>
-          )}
         </div>
 
         <Textarea
           {...form.getInputProps('message')}
           error={form.errors.message}
-          classNames={{ 
-            root: classes.root, 
-            label: classes.label, 
-            input: classes.textinput, 
-            error: classes.error 
-          }}
+          classNames={{ root: classes.root, label: classes.label, input: classes.textinput, error: classes.error }}
           label="Nachricht"
           placeholder="Nachricht oder Sonderwünsche"
           minRows={4}
@@ -165,25 +216,29 @@ export default function AppointmentForm() {
           type="submit"
           loading={submissionStatus.submitting}
           size="md"
-          styles={(theme) => ({
+          styles={{
             root: {
               backgroundColor: '#FF6B35',
               width: '100%',
               borderRadius: '16px',
-              '&:hover': {
-                backgroundColor: '#e55a2b',
-              },
+              '&:hover': { backgroundColor: '#e55a2b' },
             },
-          })}
+          }}
         >
-          Formular abschicken
+          <p>Formular abschicken</p>
         </Button>
 
-        {submissionStatus.error && (
-          <p style={{ color: 'red', fontSize: '1rem', marginTop: '1rem', textAlign: 'center' }}>
-            Fehler beim Senden. Bitte versuchen Sie es später erneut.
-          </p>
-        )}
+        {submissionStatus.succeeded && (
+        <div className="mt-4 rounded-xl border border-green-200 bg-green-50 p-3 text-sm text-green-800 text-center">
+          Vielen Dank! ✅ <br />Wir haben den von Ihnen gewählten Termin reserviert.
+        </div>
+      )}
+
+      {submissionStatus.error && (
+        <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800 text-center">
+          Leider ist dieser Termin bereits vergeben. <br /> Wählen Sie bitte ein anderes Datum oder eine andere Uhrzeit.
+        </div>
+      )}
       </form>
     </div>
   );
