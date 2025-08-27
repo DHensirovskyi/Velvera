@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Google-Bewertung — Velvera</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --brand:#FF6A00; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f6f7fb;
+      color: #111827;
+      font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .wrap { max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    .card {
+      background:#fff; border-radius:16px; padding:24px;
+      box-shadow:0 6px 24px rgba(18,18,23,.06);
+    }
+    h1 { margin:0 0 8px; font-size:22px; }
+    .muted { color:#6b7280; font-size:12px; }
+
+    .gcard {
+      margin-top: 12px;
+      display:flex; align-items:center; gap:14px;
+      text-decoration:none; border:1px solid #e5e7eb;
+      padding:14px 16px; border-radius:12px;
+      transition:.15s ease; cursor:pointer;
+      background:#fff;
+    }
+    .gcard:hover { border-color: var(--brand); box-shadow:0 2px 12px rgba(255,106,0,.15); }
+    .logo { width:40px; height:40px; border-radius:8px; display:inline-block; flex:0 0 40px; }
+    .title { font-weight:600; color:#111827; }
+    .hint { font-size:12px; color:#6b7280; word-break: break-word; }
+    .foot { margin-top:18px; font-size:12px; color:#6b7280; }
+
+    /* маленькие экраны */
+    @media (max-width: 420px) {
+      .logo { width:36px; height:36px; }
+      h1 { font-size:20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Bewerten Sie uns auf Google</h1>
+      <p class="muted">Ein Klick öffnet das Google-Formular für Bewertungen.</p>
+
+      <!-- Кликабельная карточка с логотипом Google Maps -->
+      <a id="reviewLink" class="gcard" href="#" target="_blank" rel="noopener noreferrer" aria-label="Auf Google bewerten">
+        <!-- Инлайн-логотип Google Maps (SVG) -->
+        <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <!-- Пин -->
+          <path d="M24 4c-8.3 0-15 6.7-15 15 0 10.5 15 25 15 25s15-14.5 15-25c0-8.3-6.7-15-15-15z" fill="#34A853"/>
+          <!-- Внутренний круг -->
+          <circle cx="24" cy="19" r="8" fill="#fff"/>
+          <!-- Цветные сегменты карты -->
+          <path d="M24 4a15 15 0 0 1 12.7 7.1L24 19V4z" fill="#4285F4"/>
+          <path d="M36.7 11.1A15 15 0 0 1 39 19c0 6.9-5.2 14.2-9.9 19.6L24 19l12.7-7.9z" fill="#FBBC05"/>
+          <path d="M24 4v15L11.3 11.1A15 15 0 0 1 24 4z" fill="#EA4335"/>
+        </svg>
+
+        <div>
+          <div class="title">Auf Google bewerten</div>
+          <div id="hint" class="hint">Öffnet Google Maps Bewertungsformular</div>
+        </div>
+      </a>
+
+      <div class="foot">
+        Velvera · Augsburger Str. 1 · +49 176 000000
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const qs = new URLSearchParams(location.search);
+      const direct  = qs.get('url');          // прямая ссылка на форму отзывов (если есть)
+      const placeId = qs.get('placeId');      // Google Place ID (если есть)
+      const businessQuery = qs.get('q') || 'Velvera Augsburg';
+
+      // Формируем конечный URL:
+      // 1) прямой ?url=...
+      // 2) по placeId → стандартная форма отзывов
+      // 3) фолбэк — поиск по названию в Google Maps
+      const reviewUrl =
+        direct ||
+        (placeId ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}` : '') ||
+        `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(businessQuery)}`;
+
+      const a = document.getElementById('reviewLink');
+      const hint = document.getElementById('hint');
+
+      a.href = reviewUrl;
+
+      if (direct || placeId) {
+        hint.textContent = 'Öffnet Google Maps Bewertungsformular';
+      } else {
+        hint.textContent = `Öffnet Google Maps Suche: ${businessQuery}`;
+      }
+    })();
+  </script>
+</body>
+</html>
