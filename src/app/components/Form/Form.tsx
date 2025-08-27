@@ -153,7 +153,7 @@ export default function AppointmentForm() {
             classNames={{ root: classes.root, label: classes.label, input: classes.input, error: classes.error }}
             label="Vollständiger Name"
             key={form.key('fullName')}
-            placeholder="Muzamal Hussain"
+            placeholder="Anna Müller"
             required
           />
           <TextInput
