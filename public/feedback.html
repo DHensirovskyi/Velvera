@@ -9,15 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    :root { --brand:#FF6A00; }
+    :root { --brand:#FF6A00; --fade-dur:.9s; --fade-step:.6s; }
     * { box-sizing: border-box; }
+
+    /* Центрирование контейнера */
     body {
       margin: 0;
       background: #f6f7fb;
       color: #111827;
       font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 16px;
     }
-    .wrap { max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    .wrap { max-width: 720px; width:100%; }
     .card {
       background:#fff; border-radius:16px; padding:24px;
       box-shadow:0 6px 24px rgba(18,18,23,.06);
@@ -30,37 +36,75 @@
       display:flex; align-items:center; gap:14px;
       text-decoration:none; border:1px solid #e5e7eb;
       padding:14px 16px; border-radius:12px;
-      transition:.15s ease; cursor:pointer;
-      background:#fff;
+      transition:.2s ease;
+      cursor:pointer; background:#fff;
+      box-shadow:0 0 0 rgba(255,106,0,0);
+      animation: pulseGlow 2.4s ease-in-out infinite;
+      will-change: transform, box-shadow, border-color;
     }
-    .gcard:hover { border-color: var(--brand); box-shadow:0 2px 12px rgba(255,106,0,.15); }
+    .gcard:hover { border-color: var(--brand); box-shadow:0 6px 20px rgba(255,106,0,.18); transform: translateY(-1px); }
     .logo { width:40px; height:40px; border-radius:8px; display:inline-block; flex:0 0 40px; }
     .title { font-weight:600; color:#111827; }
     .hint { font-size:12px; color:#6b7280; word-break: break-word; }
     .foot { margin-top:18px; font-size:12px; color:#6b7280; }
+
+    /* Анимации появления (~4s суммарно) */
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(10px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity:0; transform: translateX(-14px); }
+      to   { opacity:1; transform: translateX(0); }
+    }
+    .fade-in{
+      opacity:0; transform: translateY(10px);
+      animation: fadeUp var(--fade-dur) cubic-bezier(.2,.7,.2,1) forwards;
+      will-change: opacity, transform;
+    }
+    .fade-left{
+      opacity:0; transform: translateX(-14px);
+      animation: fadeLeft var(--fade-dur) cubic-bezier(.2,.7,.2,1) forwards;
+      will-change: opacity, transform;
+    }
+    .delay-1 { animation-delay: calc(1 * var(--fade-step)); }
+    .delay-2 { animation-delay: calc(2 * var(--fade-step)); }
+    .delay-3 { animation-delay: calc(3 * var(--fade-step)); }
+    .delay-4 { animation-delay: calc(4 * var(--fade-step)); }
+
+    /* Пульс/свечение карточки */
+    @keyframes pulseGlow{
+      0%   { transform:scale(1);    box-shadow:0 0 0 rgba(255,106,0,0); }
+      45%  { transform:scale(1.02); box-shadow:0 0 20px 6px rgba(255,106,0,.20); }
+      70%  { transform:scale(1.01); box-shadow:0 0 14px 4px rgba(255,106,0,.16); }
+      100% { transform:scale(1);    box-shadow:0 0 0 rgba(255,106,0,0); }
+    }
 
     /* маленькие экраны */
     @media (max-width: 420px) {
       .logo { width:36px; height:36px; }
       h1 { font-size:20px; }
     }
+
+    /* уважение к сниженной анимации */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in, .fade-left { animation:none; opacity:1; transform:none; }
+      .gcard { animation:none; }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
-      <h1>Bewerten Sie uns auf Google</h1>
-      <p class="muted">Ein Klick öffnet das Google-Formular für Bewertungen.</p>
+      <h1 class="fade-left delay-1">Bewerten Sie uns auf Google</h1>
+      <p class="muted fade-in delay-2">Ein Klick öffnet das Google-Formular für Bewertungen.</p>
 
       <!-- Кликабельная карточка с логотипом Google Maps -->
-      <a id="reviewLink" class="gcard" href="#" target="_blank" rel="noopener noreferrer" aria-label="Auf Google bewerten">
+      <a id="reviewLink" class="gcard fade-in delay-3" href="#" target="_blank" rel="noopener noreferrer" aria-label="Auf Google bewerten">
         <!-- Инлайн-логотип Google Maps (SVG) -->
         <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <!-- Пин -->
           <path d="M24 4c-8.3 0-15 6.7-15 15 0 10.5 15 25 15 25s15-14.5 15-25c0-8.3-6.7-15-15-15z" fill="#34A853"/>
-          <!-- Внутренний круг -->
           <circle cx="24" cy="19" r="8" fill="#fff"/>
-          <!-- Цветные сегменты карты -->
           <path d="M24 4a15 15 0 0 1 12.7 7.1L24 19V4z" fill="#4285F4"/>
           <path d="M36.7 11.1A15 15 0 0 1 39 19c0 6.9-5.2 14.2-9.9 19.6L24 19l12.7-7.9z" fill="#FBBC05"/>
           <path d="M24 4v15L11.3 11.1A15 15 0 0 1 24 4z" fill="#EA4335"/>
@@ -72,7 +116,7 @@
         </div>
       </a>
 
-      <div class="foot">
+      <div class="foot fade-in delay-4">
         Velvera · Augsburger Str. 1 · +49 176 000000
       </div>
     </div>
