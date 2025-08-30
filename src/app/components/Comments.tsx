@@ -14,7 +14,7 @@ interface Items{
 }
 
 const comments: Items[] = [
-  { img: "/comm1.png", name: "Emma Rose", description: "Ich liebe meinen neuen Look! Velvera hat mein Haar mit dem perfekten Schnitt und der perfekten Farbe komplett verwandelt und sowohl Stil als auch Gesundheit verbessert. Ich habe mich noch nie so selbstbewusst und erfrischt gefühlt!", label: "Balayage & Styling" },
+  { img: "/comm2.png", name: "Emma Rose", description: "Ich liebe meinen neuen Look! Velvera hat mein Haar mit dem perfekten Schnitt und der perfekten Farbe komplett verwandelt und sowohl Stil als auch Gesundheit verbessert. Ich habe mich noch nie so selbstbewusst und erfrischt gefühlt!", label: "Balayage & Styling" },
   { img: "/comm7.png", name: "Sophia Lane", description: "Velvera hat mein Haar mit dem perfekten Schnitt und der perfekten Farbe verwandelt.", label: "Keratin-Behandlung" },
   { img: "/comm3.png", name: "Jane Doe", description: "Gesundes Haar wie nie zuvor! Meine beschädigten, leblosen Strähnen fühlen sich endlich weich und gepflegt an.", label: "Haarschnitt & Föhnen" },
   { img: "/comm4.png", name: "Olivia Tate", description: "Volumen und Glanz sind zurück! Früher war mein Haar platt, aber nach der Behandlung ist es voll, federnd und hat diesen Salon-Finish.", label: "Haarreparatur-Behandlung" },
